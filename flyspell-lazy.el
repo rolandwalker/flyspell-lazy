@@ -245,15 +245,6 @@ Spellchecking is also disabled in the minibuffer."
   :type 'boolean
   :group 'flyspell-lazy)
 
-(defcustom flyspell-lazy-mode-lighter " flylz"
-  "This string appears in the mode-line when `flyspell-lazy-mode' is active.
-
-Set to nil or the empty string to disable the mode-line
-lighter for `flyspell-lazy-mode'."
-  :type 'string
-  :risky t
-  :group 'flyspell-lazy)
-
 ;; so far this does not work
 (defvar flyspell-lazy-single-ispell nil)
 ;; (defcustom flyspell-lazy-single-ispell nil
@@ -769,7 +760,6 @@ if the argument is positive and otherwise disables the mode.
 When called from Lisp, this command enables the mode if the
 argument is omitted or nil, and toggles the mode if the argument
 is 'toggle."
-  :lighter flyspell-lazy-mode-lighter
   :group 'flyspell-lazy
   :global t
   (cond
