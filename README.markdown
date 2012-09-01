@@ -1,7 +1,7 @@
 Overview
 ========
 
-Improve Emacs flyspell responsiveness with using timers.
+Improve Emacs flyspell responsiveness using idle timers.
 
 flyspell-lazy
 -------------
