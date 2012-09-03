@@ -188,7 +188,7 @@
   :link '(emacs-commentary-link "flyspell-lazy")
   :prefix "flyspell-lazy-"
   :group 'flyspell
-  :group 'extensions)
+  :group 'wp)
 
 (defcustom flyspell-lazy-idle-seconds 3
   "How many seconds of idle time before running flyspell on recent changes."
