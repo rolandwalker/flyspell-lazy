@@ -603,7 +603,7 @@ be activated in every flyspell buffer."
 
     (unless (flyspell-lazy-ignored-buffer-p (current-buffer))
       (setq flyspell-lazy-local t)
-      (add-to-list 'flyspell-lazy-buffer-list (current-buffer)))
+      (add-to-list 'flyspell-lazy-buffer-list (current-buffer))
 
     (when (and flyspell-lazy-single-ispell
                (not ispell-process))
@@ -641,7 +641,7 @@ be activated in every flyspell buffer."
 
     (add-hook 'kill-buffer-hook #'(lambda ()
                                     (with-demoted-errors (flyspell-lazy-uncheck-buffer))))
-    (add-hook 'after-change-functions 'flyspell-lazy-after-change-function nil t)))
+      (add-hook 'after-change-functions 'flyspell-lazy-after-change-function nil t))))
 
 ;; spellchecker functions
 
