@@ -47,10 +47,6 @@
 ;;
 ;; Notes
 ;;
-;;    `flyspell-lazy-mode' probably works best if you also set
-;;
-;;         (setq flyspell-large-region 1)
-;;
 ;;     If you are using "aspell" instead of "ispell" on the backend,
 ;;     the following setting may improve performance:
 ;;
@@ -80,9 +76,6 @@
 ;;     inside a word.
 ;;
 ;; TODO
-;;
-;;     Determine if flyspell-large-region should be set, and set it to
-;;     the best value when flyspell-lazy is activated.
 ;;
 ;;     Let flyspell-issue-message-flag and flyspell-issue-welcome-flag
 ;;     to nil wherever needed to improve performance.
@@ -169,6 +162,7 @@
 ;; for let*, flet, callf, callf2, setf
 (eval-when-compile
   (defvar flyspell-changes)
+  (defvar flyspell-large-region)
   (defvar ispell-process)
   (require 'cl))
 
@@ -604,6 +598,8 @@ be activated in every flyspell buffer."
     (unless (flyspell-lazy-ignored-buffer-p (current-buffer))
       (setq flyspell-lazy-local t)
       (add-to-list 'flyspell-lazy-buffer-list (current-buffer))
+
+      (set (make-local-variable 'flyspell-large-region) 1)
 
     (when (and flyspell-lazy-single-ispell
                (not ispell-process))

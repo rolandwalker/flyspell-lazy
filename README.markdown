@@ -34,10 +34,6 @@ vanilla `flyspell-mode`, though this can be changed somewhat via
 Notes
 -----
 
-`Flyspell-lazy-mode` probably works best if you also set
-
-	(setq flyspell-large-region 1)
-
 If you are using `aspell` instead of `ispell` on the backend, the
 following setting may improve performance:
 
