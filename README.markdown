@@ -3,6 +3,15 @@ Overview
 
 Improve Emacs flyspell responsiveness using idle timers.
 
+Quickstart
+----------
+
+	(require 'flyspell-lazy)
+
+	(flyspell-lazy-mode 1)
+
+	(flyspell-mode 1)      ; or (flyspell-prog-mode)
+
 flyspell-lazy
 -------------
 

@@ -14,6 +14,16 @@
 ;;
 ;;; Commentary:
 ;;
+;; Quickstart
+;;
+;;     (require 'flyspell-lazy)
+;;
+;;     (flyspell-lazy-mode 1)
+;;
+;;     (flyspell-mode 1)      ; or (flyspell-prog-mode)
+;;
+;; Explanation
+;;
 ;; `flyspell-mode' has performance issues on some platforms.
 ;; Specifically, keyboard responsiveness may be significantly
 ;; degraded on OS X.
