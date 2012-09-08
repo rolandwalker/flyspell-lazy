@@ -296,19 +296,6 @@ in GNU Emacs 24.1 or higher."
 
 ;;; utility functions
 
-;; generic utility functions
-
-;; note this strips out nils
-(defun flyspell-lazy-list-flatten (list)
-  "Flatten LIST which may contain other lists."
-  (cond
-    ((null list)
-     nil)
-    ((listp list)
-     (append (flyspell-lazy-list-flatten (car list)) (flyspell-lazy-list-flatten (cdr list))))
-    (t
-     (list list))))
-
 ;; defsubsts
 
 ;; Yes, this looks like defsubst abuse, just trying
@@ -388,9 +375,11 @@ When ADD-POINT is set, add a span around the current point."
 
         ;; always order min-to-max within cells
         (dolist (chg flyspell-changes)
-          (let ((fixed (apply 'cons (sort (flyspell-lazy-list-flatten chg) '<))))
-            (setf (car chg) (car fixed))
-            (setf (cdr chg) (cdr fixed))))
+          (when (> (car chg) (cdr chg))
+            (let ((a (car chg))
+                  (d (cdr chg)))
+              (setf (cdr chg) a)
+              (setf (car chg) d))))
 
         ;; sort and merge contiguous spans
         ;; we do this more than once.  here the purpose is to
