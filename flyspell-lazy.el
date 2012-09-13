@@ -169,11 +169,12 @@
 ;;; requires
 ;;;
 
-;; for let*, flet, callf, callf2, setf
 (eval-when-compile
+  ;; declarations for byte compiler
   (defvar flyspell-changes)
   (defvar flyspell-large-region)
   (defvar ispell-process)
+  ;; for flet, callf, callf2, setf
   (require 'cl))
 
 (declare-function flyspell-overlay-p             "flyspell.el")
