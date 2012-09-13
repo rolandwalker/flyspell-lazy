@@ -719,7 +719,7 @@ This is the primary driver for `flyspell-lazy'."
                 (sleep-for .5)
                 (compilation-goto-locus-delete-o))
               ;; compensate for inaccuracy of window-end
-              (setq end (min (+ end (window-body-width)) (point-max)))
+              (setq end (min (+ end (window-width)) (point-max)))
               (with-timeout (1 (message "Spellcheck interrupted"))
                 (if flyspell-lazy-single-ispell
                     (flet ((ispell-set-spellchecker-params (&rest args) t)
