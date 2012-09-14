@@ -169,18 +169,19 @@
 ;;; requires
 ;;;
 
-(eval-when-compile
-  ;; declarations for byte compiler
-  (defvar flyspell-changes)
-  (defvar flyspell-large-region)
-  (defvar ispell-process)
-  ;; for flet, callf, callf2, setf
-  (require 'cl))
+;; for flet, callf, callf2, setf
+(require 'cl)
 
 (declare-function flyspell-overlay-p             "flyspell.el")
 (declare-function flyspell-minibuffer-p          "flyspell.el")
 (declare-function flyspell-word                  "flyspell.el")
 (declare-function ispell-set-spellchecker-params "ispell.el"  )
+
+(eval-when-compile
+  ;; declarations for byte compiler
+  (defvar flyspell-changes)
+  (defvar flyspell-large-region)
+  (defvar ispell-process))
 
 ;;;
 ;;; customizable variables
