@@ -6,7 +6,7 @@
 ;; Homepage: http://github.com/rolandwalker/flyspell-lazy
 ;; URL: http://raw.github.com/rolandwalker/flyspell-lazy/master/flyspell-lazy.el
 ;; Version: 0.6.2
-;; Last-Updated: 13 Sep 2012
+;; Last-Updated: 17 Sep 2012
 ;; EmacsWiki: FlyspellLazy
 ;; Keywords: spelling
 ;;
@@ -61,6 +61,15 @@
 ;;     the following setting may improve performance:
 ;;
 ;;         (add-to-list 'ispell-extra-args "--sug-mode=ultra")
+;;
+;;     If you see the cursor flicker over the region during spellcheck,
+;;     make sure that `flyspell-large-region' is set to 1 (this library
+;;     tries to do that for you), and try adding the following to your
+;;     ~/.emacs
+;;
+;;         (defadvice flyspell-small-region (around flyspell-small-region-no-sit-for activate)
+;;           (flet ((sit-for (&rest args) t))
+;;             ad-do-it))
 ;;
 ;; Compatibility and Requirements
 ;;
