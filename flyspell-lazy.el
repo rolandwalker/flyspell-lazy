@@ -731,6 +731,17 @@ This is the primary driver for `flyspell-lazy'."
                 (compilation-goto-locus-delete-o))
               ;; compensate for inaccuracy of window-end
               (setq end (min (+ end (window-width)) (point-max)))
+              ;; move to word boundaries
+              (setq start (save-excursion
+                            (save-match-data
+                              (goto-char start)
+                              (search-backward-regexp "[ \n\t\r\f]" (- (point) 50) t)
+                              (point))))
+              (setq end (save-excursion
+                          (save-match-data
+                            (goto-char end)
+                            (search-forward-regexp "[ \n\t\r\f]" (+ (point) 50) t)
+                            (point))))
               (with-timeout (1 (message "Spellcheck interrupted"))
                 (if flyspell-lazy-single-ispell
                     (flet ((ispell-set-spellchecker-params (&rest args) t)
