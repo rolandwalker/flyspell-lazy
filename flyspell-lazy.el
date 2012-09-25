@@ -830,7 +830,7 @@ would usually be skipped."
 ;; mangle-whitespace: t
 ;; require-final-newline: t
 ;; coding: utf-8
-;; byte-compile-warnings: (not cl-functions)
+;; byte-compile-warnings: (not cl-functions redefine)
 ;; End:
 ;;
 ;; LocalWords: FlyspellLazy aspell setq args prog flyspell's flet
