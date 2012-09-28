@@ -178,8 +178,11 @@
 ;;; requires
 ;;;
 
-;; for flet, callf, callf2, setf
-(require 'cl)
+(eval-and-compile
+  ;; for flet/cl-flet, callf, callf2, setf
+  (require 'cl)
+  (unless (fboundp 'cl-flet)
+    (defalias 'cl-flet 'flet)))
 
 (declare-function flyspell-overlay-p             "flyspell.el")
 (declare-function flyspell-minibuffer-p          "flyspell.el")
@@ -698,7 +701,7 @@ This is the primary driver for `flyspell-lazy'."
                       (put 'flyspell-lazy-last-text 'stripped nil)
                       (with-timeout (1 (message "Spellcheck interrupted"))
                         (if flyspell-lazy-single-ispell
-                            (flet ((ispell-set-spellchecker-params (&rest args) t)
+                            (cl-flet ((ispell-set-spellchecker-params (&rest args) t)
                                    (flyspell-accept-buffer-local-defs (&rest args) t))
                               (flyspell-region start end))
                           (flyspell-region start end)))))
@@ -744,7 +747,7 @@ This is the primary driver for `flyspell-lazy'."
                             (point))))
               (with-timeout (1 (message "Spellcheck interrupted"))
                 (if flyspell-lazy-single-ispell
-                    (flet ((ispell-set-spellchecker-params (&rest args) t)
+                    (cl-flet ((ispell-set-spellchecker-params (&rest args) t)
                            (flyspell-accept-buffer-local-defs (&rest args) t))
                       (flyspell-region start end))
                   (flyspell-region start end))))))))))
@@ -814,7 +817,7 @@ would usually be skipped."
           (let ((font-lock-fontify-buffer-function 'font-lock-default-fontify-buffer))
             (font-lock-fontify-buffer)))
         (if flyspell-lazy-single-ispell
-            (flet ((ispell-set-spellchecker-params (&rest args) t)
+            (cl-flet ((ispell-set-spellchecker-params (&rest args) t)
                    (flyspell-accept-buffer-local-defs (&rest args) t))
               (flyspell-buffer))
           ;; else
@@ -835,7 +838,7 @@ would usually be skipped."
 ;;
 ;; LocalWords: FlyspellLazy aspell setq args prog flyspell's flet
 ;; LocalWords: callf setf flylz nils defsubsts defsubst checkable
-;; LocalWords: inflooping punct
+;; LocalWords: inflooping punct cl-flet
 ;;
 
 ;;; flyspell-lazy.el ends here
