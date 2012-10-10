@@ -288,7 +288,6 @@ Spellchecking is also disabled in the minibuffer."
 (defvar flyspell-lazy-hurry-flag   nil "Non-nil means hurrying is currently active.")
 (defvar flyspell-lazy-debug        nil "Run in debug mode.")
 (defvar flyspell-lazy-last-text    ""  "Last text checked by flyspell-lazy.")
-(make-variable-buffer-local 'flyspell-lazy-mode)
 (make-variable-buffer-local 'flyspell-lazy-hurry-flag)
 (make-variable-buffer-local 'flyspell-lazy-local)
 
