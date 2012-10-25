@@ -24,9 +24,9 @@
 ;;
 ;; Explanation
 ;;
-;; `flyspell-mode' has performance issues on some platforms.
-;; Specifically, keyboard responsiveness may be significantly
-;; degraded on OS X.
+;; Emacs' built-in `flyspell-mode' has performance issues on some
+;; platforms.  Specifically, keyboard responsiveness may be
+;; significantly degraded on OS X.
 ;;
 ;; This package reduces the amount of work done by flyspell.  Instead
 ;; of checking *instantly* as you type, spelling will be checked when
@@ -34,7 +34,7 @@
 ;; `flyspell-mode' does not use idle timers but a subtle combination
 ;; of hooks and `sit-for'.)
 ;;
-;; This package also turns off `flyspell-mode' completely for certain
+;; This package also forces `flyspell-mode' off completely for certain
 ;; buffers.
 ;;
 ;; To use this library, add the following to your ~/.emacs
@@ -844,7 +844,7 @@ would usually be skipped."
 ;;
 ;; LocalWords: FlyspellLazy aspell setq args prog flyspell's flet
 ;; LocalWords: callf setf flylz nils defsubsts defsubst checkable
-;; LocalWords: inflooping punct flet
+;; LocalWords: inflooping punct flet devel
 ;;
 
 ;;; flyspell-lazy.el ends here

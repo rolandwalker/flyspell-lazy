@@ -16,12 +16,12 @@ Quickstart
 (flyspell-mode 1)      ; or (flyspell-prog-mode)
 ```
 
-flyspell-lazy
--------------
+Explanation
+-----------
 
-`flyspell-mode` has performance issues on some platforms.
-Specifically, keyboard responsiveness may be significantly
-degraded on OS X.
+Emacs' built-in `flyspell-mode` has performance issues on some
+platforms.  Specifically, keyboard responsiveness may be
+significantly degraded on OS X.
 
 This package reduces the amount of work done by flyspell.  Instead
 of checking *instantly* as you type, spelling will be checked when
@@ -29,7 +29,7 @@ the current buffer has been idle for a short time.  (Vanilla
 `flyspell-mode` does not use idle timers but a subtle combination
 of hooks and `sit-for`.)
 
-This package also turns off `flyspell-mode` completely for certain
+This package also forces `flyspell-mode` off completely for certain
 buffers.
 
 To use this library, add the following to your ~/.emacs
