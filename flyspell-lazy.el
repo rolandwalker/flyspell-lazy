@@ -177,9 +177,7 @@
 ;;; Code:
 ;;
 
-;;;
-;;; requires
-;;;
+;;; requirements
 
 (eval-and-compile
   ;; for flet/cl-flet, callf, callf2, setf
@@ -189,20 +187,19 @@
     (put 'cl-flet 'lisp-indent-function 1)
     (put 'cl-flet 'edebug-form-spec '((&rest (defun*)) cl-declarations body))))
 
+;;; declarations
+
 (declare-function flyspell-overlay-p             "flyspell.el")
 (declare-function flyspell-minibuffer-p          "flyspell.el")
 (declare-function flyspell-word                  "flyspell.el")
 (declare-function ispell-set-spellchecker-params "ispell.el"  )
 
 (eval-when-compile
-  ;; declarations for byte compiler
   (defvar flyspell-changes)
   (defvar flyspell-large-region)
   (defvar ispell-process))
 
-;;;
 ;;; customizable variables
-;;;
 
 ;;;###autoload
 (defgroup flyspell-lazy nil
