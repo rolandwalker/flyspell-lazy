@@ -506,6 +506,14 @@ If SECONDS is t, hurry by 1 second."
        (setq flyspell-lazy-hurry-flag t)
        (timer-set-idle-time flyspell-lazy-timer seconds t)))))
 
+(defsubst flyspell-lazy-has-overlay (pos)
+  "If POS has a flyspell overlay, return the overlay."
+  (catch 'saw
+    (dolist (ov (overlays-at pos))
+      (when (flyspell-overlay-p ov)
+        (throw 'saw ov)))
+    nil))
+
 ;; These may be called from inside hooks on interactive commands
 
 (defsubst flyspell-lazy-user-just-completed-word ()
@@ -517,16 +525,20 @@ If SECONDS is t, hurry by 1 second."
        (not (minibufferp (current-buffer)))
        (not (ignore-errors (looking-back "[ \n\t\r\f,:!.?\"()/]\\{2\\}" 5)))))
 
-(defsubst flyspell-lazy-prev-word-contains-error ()
-  "Whether the previous word contains an error."
-  (or (flyspell-overlay-p (car (overlays-at (point))))
+(defsubst flyspell-lazy-prev-or-current-word-contains-error ()
+  "Whether the previous or current word contains an error.
+
+This function only looks backward, so it does not detect an
+error marked in the current word if that overlay starts
+after the point."
+  (or (flyspell-lazy-has-overlay (point))
+      (flyspell-lazy-has-overlay (1- (point)))
       (and (> (previous-overlay-change (point))
               (save-excursion
-                (unless (looking-at-p "[^ \n\t\r\f]")
-                  (search-backward-regexp "[^ \n\t\r\f]" (- (point) 50) t))
-                (or
-                 (search-backward-regexp "[ \n\t\r\f]" (- (point) 50) t) 1)))
-           (flyspell-overlay-p (car (overlays-at (1- (previous-overlay-change (point)))))))))
+                (if (memq (char-before) '(?\n ?\r ?\f ?\t ?\s ?, ?: ?! ?. ?? ?\" ?\( ?\) ?/))
+                    (or (search-backward-regexp "[^ \n\t\r\f,:!.?\"()/]" (- (point) 50) t) (point))
+                  (point))))
+           (flyspell-lazy-has-overlay (1- (previous-overlay-change (point)))))))
 
 ;; buffer functions
 
@@ -563,7 +575,7 @@ START, STOP, and LEN are as passed to a hook on
   (when (and (not flyspell-lazy-extra-lazy)
              (or flyspell-lazy-use-flyspell-word (not flyspell-lazy-hurry-flag))
              (flyspell-lazy-user-just-completed-word)
-             (flyspell-lazy-prev-word-contains-error))
+             (flyspell-lazy-prev-or-current-word-contains-error))
     (flyspell-lazy-debug-progn
       (message "last completed word needs checking"))
     (if flyspell-lazy-use-flyspell-word
