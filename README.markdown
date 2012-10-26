@@ -1,4 +1,4 @@
-[![Build Status](https://secure.travis-ci.org/rolandwalker/flyspell-lazy.png)](http://travis-ci.org/rolandwalker/flyspell-lazy)
+[![Build Status](https://secure.travis-ci.org/rolandwalker/flyspell-lazy.png?branch=master)](http://travis-ci.org/rolandwalker/flyspell-lazy)
 
 Overview
 ========
