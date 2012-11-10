@@ -180,12 +180,12 @@
 ;;; requirements
 
 (eval-and-compile
-  ;; for flet/cl-flet, callf, callf2, setf
+  ;; for flet/cl-flet*, callf, callf2, setf
   (require 'cl)
-  (unless (fboundp 'cl-flet)
-    (defalias 'cl-flet 'flet)
-    (put 'cl-flet 'lisp-indent-function 1)
-    (put 'cl-flet 'edebug-form-spec '((&rest (defun*)) cl-declarations body))))
+  (unless (fboundp 'cl-flet*)
+    (defalias 'cl-flet* 'flet)
+    (put 'cl-flet* 'lisp-indent-function 1)
+    (put 'cl-flet* 'edebug-form-spec '((&rest (defun*)) cl-declarations body))))
 
 ;;; declarations
 
@@ -716,8 +716,8 @@ This is the primary driver for `flyspell-lazy'."
                       (put 'flyspell-lazy-last-text 'stripped nil)
                       (with-timeout (1 (message "Spellcheck interrupted"))
                         (if flyspell-lazy-single-ispell
-                            (cl-flet ((ispell-set-spellchecker-params (&rest _ignored) t)
-                                      (flyspell-accept-buffer-local-defs (&rest _ignored) t))
+                            (cl-flet* ((ispell-set-spellchecker-params (&rest _ignored) t)
+                                       (flyspell-accept-buffer-local-defs (&rest _ignored) t))
                               (flyspell-region start end))
                           (flyspell-region start end)))))
                   (pop flyspell-changes))
@@ -762,8 +762,8 @@ This is the primary driver for `flyspell-lazy'."
                             (point))))
               (with-timeout (1 (message "Spellcheck interrupted"))
                 (if flyspell-lazy-single-ispell
-                    (cl-flet ((ispell-set-spellchecker-params (&rest _ignored) t)
-                              (flyspell-accept-buffer-local-defs (&rest _ignored) t))
+                    (cl-flet* ((ispell-set-spellchecker-params (&rest _ignored) t)
+                               (flyspell-accept-buffer-local-defs (&rest _ignored) t))
                       (flyspell-region start end))
                   (flyspell-region start end))))))))))
 
@@ -832,8 +832,8 @@ would usually be skipped."
           (let ((font-lock-fontify-buffer-function 'font-lock-default-fontify-buffer))
             (font-lock-fontify-buffer)))
         (if flyspell-lazy-single-ispell
-            (cl-flet ((ispell-set-spellchecker-params (&rest _ignored) t)
-                      (flyspell-accept-buffer-local-defs (&rest _ignored) t))
+            (cl-flet* ((ispell-set-spellchecker-params (&rest _ignored) t)
+                       (flyspell-accept-buffer-local-defs (&rest _ignored) t))
               (flyspell-buffer))
           ;; else
           (flyspell-buffer))))))
