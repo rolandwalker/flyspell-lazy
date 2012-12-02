@@ -572,21 +572,22 @@ recent word.  See `flyspell-lazy-use-flyspell-word'.
 
 START, STOP, and LEN are as passed to a hook on
 `after-change-functions'."
-  ;; hurry spellcheck timer based on number or size of recent edits
-  (when (and (not flyspell-lazy-hurry-flag)
-             (or (> (length flyspell-changes) flyspell-lazy-changes-threshold)
-                 (> (abs (- stop start)) flyspell-lazy-size-threshold)))
-    (flyspell-lazy-hurry .5))
-  ;; hurry spellcheck timer if the user might have just corrected a word marked with error
-  (when (and (not flyspell-lazy-extra-lazy)
-             (or flyspell-lazy-use-flyspell-word (not flyspell-lazy-hurry-flag))
-             (flyspell-lazy-user-just-completed-word)
-             (flyspell-lazy-prev-or-current-word-contains-error))
-    (flyspell-lazy-debug-progn
-      (message "last completed word needs checking"))
-    (if flyspell-lazy-use-flyspell-word
-        (flyspell-word)
-      (flyspell-lazy-hurry .3))))
+  (save-match-data
+    ;; hurry spellcheck timer based on number or size of recent edits
+    (when (and (not flyspell-lazy-hurry-flag)
+               (or (> (length flyspell-changes) flyspell-lazy-changes-threshold)
+                   (> (abs (- stop start)) flyspell-lazy-size-threshold)))
+      (flyspell-lazy-hurry .5))
+    ;; hurry spellcheck timer if the user might have just corrected a word marked with error
+    (when (and (not flyspell-lazy-extra-lazy)
+               (or flyspell-lazy-use-flyspell-word (not flyspell-lazy-hurry-flag))
+               (flyspell-lazy-user-just-completed-word)
+               (flyspell-lazy-prev-or-current-word-contains-error))
+      (flyspell-lazy-debug-progn
+        (message "last completed word needs checking"))
+      (if flyspell-lazy-use-flyspell-word
+          (flyspell-word)
+        (flyspell-lazy-hurry .3)))))
 
 ;; todo disable flyspell-lazy for just the current buffer,
 ;; keeping flyspell-mode as-is, without inflooping in hooks.
