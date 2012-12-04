@@ -30,9 +30,9 @@
 ;;
 ;; This package reduces the amount of work done by flyspell.  Instead
 ;; of checking *instantly* as you type, spelling will be checked when
-;; the current buffer has been idle for a short time.  (Vanilla
-;; `flyspell-mode' does not use idle timers but a subtle combination
-;; of hooks and `sit-for'.)
+;; Emacs has been idle for a short time.  (Vanilla `flyspell-mode'
+;; does not use idle timers but a subtle combination of hooks and
+;; `sit-for'.)
 ;;
 ;; This package also forces `flyspell-mode' off completely for certain
 ;; buffers.
