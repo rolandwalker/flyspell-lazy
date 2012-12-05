@@ -26,7 +26,9 @@
 ;;
 ;; Emacs' built-in `flyspell-mode' has performance issues on some
 ;; platforms.  Specifically, keyboard responsiveness may be
-;; significantly degraded on OS X.
+;; significantly degraded on OS X.  See this bug:
+;;
+;;     http://debbugs.gnu.org/cgi/bugreport.cgi?bug=2056
 ;;
 ;; This package reduces the amount of work done by flyspell.  Instead
 ;; of checking *instantly* as you type, spelling will be checked when
