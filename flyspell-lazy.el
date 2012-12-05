@@ -205,7 +205,9 @@
 (defgroup flyspell-lazy nil
   "Improve flyspell responsiveness using idle timers."
   :version "0.6.3"
-  :link '(emacs-commentary-link "flyspell-lazy")
+  :link '(emacs-commentary-link :tag "Commentary" "flyspell-lazy")
+  :link '(url-link :tag "Github" "http://github.com/rolandwalker/flyspell-lazy")
+  :link '(url-link :tag "EmacsWiki" "http://emacswiki.org/emacs/FlyspellLazy")
   :prefix "flyspell-lazy-"
   :group 'flyspell
   :group 'wp)
