@@ -37,6 +37,8 @@
 
 ;;; flyspell-lazy-check-buffer (&optional force)
 
+;;; flyspell-lazy-mode
+
 ;;
 ;; Emacs
 ;;
