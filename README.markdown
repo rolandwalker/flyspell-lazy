@@ -19,9 +19,10 @@ Quickstart
 Explanation
 -----------
 
-Emacs' built-in `flyspell-mode` has performance issues on some
-platforms.  Specifically, keyboard responsiveness may be
-significantly degraded on OS X.  See this bug:
+This package is only useful if you are experiencing performance
+issues with Emacs' built-in `flyspell-mode`.  Specifically, keyboard
+responsiveness was significantly degraded on OS X before GNU Emacs
+24.3.  See this (now resolved) bug:
 
 [http://debbugs.gnu.org/cgi/bugreport.cgi?bug=2056](http://debbugs.gnu.org/cgi/bugreport.cgi?bug=2056)
 
