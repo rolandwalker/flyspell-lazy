@@ -208,7 +208,7 @@
   "Improve flyspell responsiveness using idle timers."
   :version "0.6.4"
   :link '(emacs-commentary-link :tag "Commentary" "flyspell-lazy")
-  :link '(url-link :tag "Github" "http://github.com/rolandwalker/flyspell-lazy")
+  :link '(url-link :tag "GitHub" "http://github.com/rolandwalker/flyspell-lazy")
   :link '(url-link :tag "EmacsWiki" "http://emacswiki.org/emacs/FlyspellLazy")
   :prefix "flyspell-lazy-"
   :group 'flyspell
