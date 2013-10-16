@@ -62,7 +62,7 @@ following setting may improve performance:
 Compatibility and Requirements
 ------------------------------
 
-	GNU Emacs version 24.3-devel     : yes, at the time of writing
+	GNU Emacs version 24.4-devel     : no, at the time of writing
 	GNU Emacs version 24.3           : yes
 	GNU Emacs version 23.3           : yes
 	GNU Emacs version 22.3 and lower : no
