@@ -191,13 +191,13 @@
 
 ;;; declarations
 
-(declare-function flyspell-overlay-p             "flyspell.el")
 (declare-function flyspell-auto-correct-previous-hook "flyspell.el")
-(declare-function flyspell-minibuffer-p          "flyspell.el")
+(declare-function flyspell-minibuffer-p               "flyspell.el")
+(declare-function flyspell-overlay-p                  "flyspell.el")
 (declare-function flyspell-post-command-hook          "flyspell.el")
 (declare-function flyspell-pre-command-hook           "flyspell.el")
-(declare-function flyspell-word                  "flyspell.el")
-(declare-function ispell-set-spellchecker-params "ispell.el"  )
+(declare-function flyspell-word                       "flyspell.el")
+(declare-function ispell-set-spellchecker-params      "ispell.el"  )
 
 (eval-when-compile
   (defvar flyspell-changes)
