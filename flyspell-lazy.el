@@ -888,7 +888,7 @@ would usually be skipped."
 ;;
 ;; LocalWords: FlyspellLazy aspell setq args prog flyspell's flet
 ;; LocalWords: callf setf flylz nils defsubsts defsubst checkable
-;; LocalWords: inflooping punct flet devel
+;; LocalWords: inflooping punct devel
 ;;
 
 ;;; flyspell-lazy.el ends here
