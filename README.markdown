@@ -24,7 +24,7 @@ issues with Emacs' built-in `flyspell-mode`.  Specifically, keyboard
 responsiveness was significantly degraded on OS X before GNU Emacs
 24.3.  See this (now resolved) bug:
 
-[http://debbugs.gnu.org/cgi/bugreport.cgi?bug=2056](http://debbugs.gnu.org/cgi/bugreport.cgi?bug=2056)
+<http://debbugs.gnu.org/cgi/bugreport.cgi?bug=2056>
 
 This package reduces the amount of work done by flyspell.  Instead
 of checking *instantly* as you type, spelling will be checked when
