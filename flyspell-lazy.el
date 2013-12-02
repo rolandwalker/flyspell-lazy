@@ -299,11 +299,12 @@ Spellchecking is also disabled in the minibuffer."
 This is portable to versions of Emacs without dynamic `flet`."
   (declare (debug t) (indent 2))
   (let ((o (gensym "--function--")))
-    `(let ((,o (symbol-function ,func)))
+    `(let ((,o (ignore-errors (symbol-function ,func))))
        (fset ,func #'(lambda (&rest _ignored) ,ret-val))
        (unwind-protect
            (progn ,@body)
-         (fset ,func ,o)))))
+         (when ,o
+           (fset ,func ,o))))))
 
 (eval-and-compile
   (if (and
