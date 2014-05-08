@@ -4,7 +4,7 @@
 ;;
 ;; Author: Roland Walker <walker@pobox.com>
 ;; Homepage: http://github.com/rolandwalker/flyspell-lazy
-;; URL: http://raw.github.com/rolandwalker/flyspell-lazy/master/flyspell-lazy.el
+;; URL: http://raw.githubusercontent.com/rolandwalker/flyspell-lazy/master/flyspell-lazy.el
 ;; Version: 0.6.6
 ;; Last-Updated: 28 Oct 2013
 ;; EmacsWiki: FlyspellLazy
