@@ -253,9 +253,10 @@ faster than the default."
   :group 'flyspell-lazy)
 
 (defcustom flyspell-lazy-disallow-buffers '("\\`[ *]")
-  "Turn off flyspell in buffers matching this regular expression.
+  "Turn off flyspell in buffers matching these regular expressions.
 
-The default matches the names of special buffers such as \"*scratch*\".
+The default list contains a single item matching the names of
+special buffers such as \"*scratch*\".
 
 Spellchecking is also disabled in the minibuffer."
   :type '(repeat regexp)
