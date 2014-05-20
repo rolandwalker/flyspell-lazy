@@ -655,47 +655,47 @@ be activated in every flyspell buffer."
     (flyspell-lazy-debug-progn
       (message "setting up flyspell-lazy for buffer"))
 
-      (setq flyspell-lazy-local t)
-      (add-to-list 'flyspell-lazy-buffer-list (current-buffer))
+    (setq flyspell-lazy-local t)
+    (add-to-list 'flyspell-lazy-buffer-list (current-buffer))
 
-      (set (make-local-variable 'flyspell-large-region) 1)
+    (set (make-local-variable 'flyspell-large-region) 1)
 
-      (when (and flyspell-lazy-single-ispell
-                 (not ispell-process))
-        (ispell-set-spellchecker-params))
+    (when (and flyspell-lazy-single-ispell
+               (not ispell-process))
+      (ispell-set-spellchecker-params))
 
-      (unless (> flyspell-lazy-idle-seconds 0)
-        (setq flyspell-lazy-idle-seconds 1))
+    (unless (> flyspell-lazy-idle-seconds 0)
+      (setq flyspell-lazy-idle-seconds 1))
 
-      (unless (numberp flyspell-lazy-minimum-word-length)
-        (setq flyspell-lazy-minimum-word-length 1))
-      (callf round flyspell-lazy-minimum-word-length)
-      (unless (> flyspell-lazy-minimum-word-length 0)
-        (setq flyspell-lazy-minimum-word-length 1))
+    (unless (numberp flyspell-lazy-minimum-word-length)
+      (setq flyspell-lazy-minimum-word-length 1))
+    (callf round flyspell-lazy-minimum-word-length)
+    (unless (> flyspell-lazy-minimum-word-length 0)
+      (setq flyspell-lazy-minimum-word-length 1))
 
-      ;; Remove hooks that bog down responsiveness.  These are the main
-      ;; things that bog down Cocoa Emacs.
-      (remove-hook 'post-command-hook      (function flyspell-post-command-hook) t)
-      (remove-hook 'pre-command-hook       (function flyspell-pre-command-hook) t)
-      (remove-hook 'pre-command-hook       (function flyspell-auto-correct-previous-hook) t)
+    ;; Remove hooks that bog down responsiveness.  These are the main
+    ;; things that bog down Cocoa Emacs.
+    (remove-hook 'post-command-hook      (function flyspell-post-command-hook) t)
+    (remove-hook 'pre-command-hook       (function flyspell-pre-command-hook) t)
+    (remove-hook 'pre-command-hook       (function flyspell-auto-correct-previous-hook) t)
 
-      ;; todo Still using the data gathered by this hook, though it seems like
-      ;;      a more clever idea would be to remove it as well and then piggyback
-      ;;      spellchecking on the data in buffer-undo-list.
-      ;; (remove-hook 'after-change-functions 'fly-spell-after-change-function t)
+    ;; todo Still using the data gathered by this hook, though it seems like
+    ;;      a more clever idea would be to remove it as well and then piggyback
+    ;;      spellchecking on the data in buffer-undo-list.
+    ;; (remove-hook 'after-change-functions 'fly-spell-after-change-function t)
 
-      ;; Add the hooks and timers used by flyspell-lazy, which are hopefully
-      ;; more efficient than the above.
-      (unless (and flyspell-lazy-timer
-                   (memq flyspell-lazy-timer timer-idle-list))
-        (setq flyspell-lazy-timer (run-with-idle-timer flyspell-lazy-idle-seconds t 'flyspell-lazy-check-pending)))
+    ;; Add the hooks and timers used by flyspell-lazy, which are hopefully
+    ;; more efficient than the above.
+    (unless (and flyspell-lazy-timer
+                 (memq flyspell-lazy-timer timer-idle-list))
+      (setq flyspell-lazy-timer (run-with-idle-timer flyspell-lazy-idle-seconds t 'flyspell-lazy-check-pending)))
 
-      (unless (and flyspell-lazy-window-timer
-                   (memq flyspell-lazy-window-timer timer-idle-list))
-        (setq flyspell-lazy-window-timer (run-with-idle-timer flyspell-lazy-window-idle-seconds t 'flyspell-lazy-check-visible)))
+    (unless (and flyspell-lazy-window-timer
+                 (memq flyspell-lazy-window-timer timer-idle-list))
+      (setq flyspell-lazy-window-timer (run-with-idle-timer flyspell-lazy-window-idle-seconds t 'flyspell-lazy-check-visible)))
 
-      (add-hook 'kill-buffer-hook #'(lambda ()
-                                      (with-demoted-errors (flyspell-lazy-uncheck-buffer))))
+    (add-hook 'kill-buffer-hook #'(lambda ()
+                                    (with-demoted-errors (flyspell-lazy-uncheck-buffer))))
     (add-hook 'after-change-functions 'flyspell-lazy-after-change-function nil t)))
 
 ;; spellchecker functions
