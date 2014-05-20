@@ -23,7 +23,7 @@
 
 ;;; flyspell-lazy-uncheck-buffer (&optional buffer)
 
-;;; flyspell-lazy-ignored-buffer-p (&optional buffer)
+;;; flyspell-lazy-disallowed-buffer-p (&optional buffer)
 
 ;;; flyspell-lazy-after-change-function (start stop len)
 

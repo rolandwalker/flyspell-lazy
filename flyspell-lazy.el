@@ -577,8 +577,8 @@ after the point."
   (callf or buffer (current-buffer))
   (callf2 remove buffer flyspell-lazy-buffer-list))
 
-(defun flyspell-lazy-ignored-buffer-p (&optional buffer)
-  "Whether BUFFER is to be ignored."
+(defun flyspell-lazy-disallowed-buffer-p (&optional buffer)
+  "Whether BUFFER is to be disallowed from checking."
   (callf or buffer (current-buffer))
   (or (flyspell-minibuffer-p buffer)
       (catch 'match
@@ -645,7 +645,7 @@ be activated in every flyspell buffer."
 (defun flyspell-lazy-load ()
   "Setup for `flyspell-lazy'.  Designed to be used inside `flyspell-mode-hook'."
 
-  (if (or (flyspell-lazy-ignored-buffer-p (current-buffer))
+  (if (or (flyspell-lazy-disallowed-buffer-p (current-buffer))
           (not flyspell-mode))
 
       ;; unload for only this buffer - working?
