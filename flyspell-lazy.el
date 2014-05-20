@@ -645,7 +645,8 @@ be activated in every flyspell buffer."
 (defun flyspell-lazy-load ()
   "Setup for `flyspell-lazy'.  Designed to be used inside `flyspell-mode-hook'."
 
-  (if (not flyspell-mode)
+  (if (or (flyspell-lazy-ignored-buffer-p (current-buffer))
+          (not flyspell-mode))
 
       ;; unload for only this buffer - working?
       (flyspell-lazy-unload)
@@ -653,8 +654,6 @@ be activated in every flyspell buffer."
     ;; else do setup
     (flyspell-lazy-debug-progn
       (message "setting up flyspell-lazy for buffer"))
-
-    (unless (flyspell-lazy-ignored-buffer-p (current-buffer))
 
       (setq flyspell-lazy-local t)
       (add-to-list 'flyspell-lazy-buffer-list (current-buffer))
@@ -697,7 +696,7 @@ be activated in every flyspell buffer."
 
       (add-hook 'kill-buffer-hook #'(lambda ()
                                       (with-demoted-errors (flyspell-lazy-uncheck-buffer))))
-      (add-hook 'after-change-functions 'flyspell-lazy-after-change-function nil t))))
+    (add-hook 'after-change-functions 'flyspell-lazy-after-change-function nil t)))
 
 ;; spellchecker functions
 
