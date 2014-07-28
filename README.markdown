@@ -8,7 +8,7 @@ Improve Emacs flyspell responsiveness using idle timers.
 Quickstart
 ----------
 
-```lisp
+```elisp
 (require 'flyspell-lazy)
  
 (flyspell-lazy-mode 1)
@@ -37,7 +37,7 @@ buffers.
 
 To use this library, add the following to your ~/.emacs
 
-```lisp
+```elisp
 (require 'flyspell-lazy)
 (flyspell-lazy-mode 1)
 ```
@@ -55,7 +55,7 @@ Notes
 If you are using `aspell` instead of `ispell` on the backend, the
 following setting may improve performance:
 
-```lisp
+```elisp
 (add-to-list 'ispell-extra-args "--sug-mode=ultra")
 ```
 
