@@ -1,12 +1,10 @@
 [![Build Status](https://secure.travis-ci.org/rolandwalker/flyspell-lazy.png?branch=master)](http://travis-ci.org/rolandwalker/flyspell-lazy)
 
-Overview
-========
+# Overview
 
 Improve Emacs flyspell responsiveness using idle timers.
 
-Quickstart
-----------
+## Quickstart
 
 ```elisp
 (require 'flyspell-lazy)
@@ -16,8 +14,7 @@ Quickstart
 (flyspell-mode 1)      ; or (flyspell-prog-mode)
 ```
 
-Explanation
------------
+## Explanation
 
 This package is only useful if you are experiencing performance
 issues with Emacs' built-in `flyspell-mode`.  Specifically, keyboard
@@ -49,8 +46,7 @@ not load flyspell for you.
 vanilla `flyspell-mode`, though this can be changed somewhat via
 `customize`.
 
-Notes
------
+## Notes
 
 If you are using `aspell` instead of `ispell` on the backend, the
 following setting may improve performance:
@@ -59,8 +55,7 @@ following setting may improve performance:
 (add-to-list 'ispell-extra-args "--sug-mode=ultra")
 ```
 
-Compatibility and Requirements
-------------------------------
+## Compatibility and Requirements
 
 	GNU Emacs version 24.4-devel     : yes, at the time of writing
 	GNU Emacs version 24.3           : yes
