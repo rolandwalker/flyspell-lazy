@@ -32,7 +32,7 @@ does not use idle timers but a subtle combination of hooks and
 This package also forces `flyspell-mode` off completely for certain
 buffers.
 
-To use this library, add the following to your ~/.emacs
+To use this library, add the following to your `~/.emacs` file
 
 ```elisp
 (require 'flyspell-lazy)
