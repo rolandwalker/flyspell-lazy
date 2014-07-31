@@ -4,6 +4,11 @@
 
 Improve Emacs flyspell responsiveness using idle timers.
 
+ * [Quickstart](#quickstart)
+ * [Explanation](#explanation)
+ * [Notes](#notes)
+ * [Compatibility and Requirements](#compatibility-and-requirements)
+
 ## Quickstart
 
 ```elisp
