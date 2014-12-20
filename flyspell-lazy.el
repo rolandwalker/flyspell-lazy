@@ -241,7 +241,7 @@ The default behavior is to hurry the idle timer when leaving a marked word."
 (defcustom flyspell-lazy-extra-lazy nil
   "Never do per-word checks.  Only use idle timers.
 
-The default behavior is to perform a single-word check if a work is completed
+The default behavior is to perform a single-word check if a word is completed
 which is also currently marked as an error.  Setting this option might be
 faster than the default."
   :type 'boolean
