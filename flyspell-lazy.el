@@ -343,6 +343,19 @@ in GNU Emacs 24.1 or higher."
 
 ;;; utility functions
 
+(defun flyspell-lazy-safe-bounds (start end)
+  "Return START and END, ordered and limited by `point-min', `point-max'."
+  (let ((bounds (sort (list start end) '<)))
+    (list (max (car bounds) (point-min))
+          (min (cadr bounds) (point-max)))))
+
+(defun flyspell-lazy-safe-buffer-substring (start end)
+  "Safer version of `buffer-substring-no-properties'.
+
+START and END are as documented for `buffer-substring-no-properties'."
+  (apply 'buffer-substring-no-properties
+         (flyspell-lazy-safe-bounds start end)))
+
 ;; defsubsts
 
 ;; Yes, this looks like defsubst abuse, just trying
@@ -505,8 +518,9 @@ This is used to avoid unneeded spell checks."
   (save-match-data
     (when (= 1 (length flyspell-changes))
       (let ((new-text (flyspell-lazy-strip-text
-                       (buffer-substring-no-properties (car (car flyspell-changes))
-                                                       (cdr (car flyspell-changes))))))
+                       (flyspell-lazy-safe-buffer-substring
+                        (car (car flyspell-changes))
+                        (cdr (car flyspell-changes))))))
         (unless (get 'flyspell-lazy-last-text 'stripped)
           (callf flyspell-lazy-strip-text flyspell-lazy-last-text)
           (put 'flyspell-lazy-last-text 'stripped t))
@@ -733,8 +747,8 @@ This is the primary driver for `flyspell-lazy'."
                             (consp flyspell-changes)
                             (eq buf (current-buffer)))                ; should not be needed, trying to work around bug
                   (save-excursion
-                    (let ((start (car (car flyspell-changes)))
-                          (end   (cdr (car flyspell-changes)))
+                    (let ((start (max (point-min) (car (car flyspell-changes))))
+                          (end   (min (point-max) (cdr (car flyspell-changes))))
                           (flyspell-issue-message-flag nil))          ; improves performance
                       (flyspell-lazy-debug-progn
                         (message "checking region: %s to %s" start end)
@@ -742,14 +756,15 @@ This is the primary driver for `flyspell-lazy'."
                         (redisplay)
                         (sleep-for .5)
                         (compilation-goto-locus-delete-o))
-                      (setq flyspell-lazy-last-text (buffer-substring-no-properties start end))
+                      (setq flyspell-lazy-last-text
+                            (flyspell-lazy-safe-buffer-substring start end))
                       (put 'flyspell-lazy-last-text 'stripped nil)
                       (with-timeout (1 (message "Spellcheck interrupted"))
                         (if flyspell-lazy-single-ispell
                             (flyspell-lazy--with-mocked-function 'ispell-set-spellchecker-params t
                               (flyspell-lazy--with-mocked-function 'flyspell-accept-buffer-local-defs t
-                                (flyspell-region start end)))
-                          (flyspell-region start end)))))
+                                (apply 'flyspell-region (flyspell-lazy-safe-bounds start end))))
+                          (apply 'flyspell-region (flyspell-lazy-safe-bounds start end))))))
                   (pop flyspell-changes))
                 (flyspell-lazy-debug-progn
                   (message "leftover changes: %s" flyspell-changes)
