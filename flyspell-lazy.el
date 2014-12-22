@@ -5,8 +5,8 @@
 ;; Author: Roland Walker <walker@pobox.com>
 ;; Homepage: http://github.com/rolandwalker/flyspell-lazy
 ;; URL: http://raw.githubusercontent.com/rolandwalker/flyspell-lazy/master/flyspell-lazy.el
-;; Version: 0.6.8
-;; Last-Updated: 20 May 2014
+;; Version: 0.6.10
+;; Last-Updated: 22 Dec 2014
 ;; EmacsWiki: FlyspellLazy
 ;; Keywords: spelling
 ;;
@@ -203,7 +203,7 @@
 ;;;###autoload
 (defgroup flyspell-lazy nil
   "Improve flyspell responsiveness using idle timers."
-  :version "0.6.8"
+  :version "0.6.10"
   :link '(emacs-commentary-link :tag "Commentary" "flyspell-lazy")
   :link '(url-link :tag "GitHub" "http://github.com/rolandwalker/flyspell-lazy")
   :link '(url-link :tag "EmacsWiki" "http://emacswiki.org/emacs/FlyspellLazy")
