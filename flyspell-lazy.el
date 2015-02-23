@@ -1,6 +1,6 @@
 ;;; flyspell-lazy.el --- Improve flyspell responsiveness using idle timers
 ;;
-;; Copyright (c) 2012-14 Roland Walker
+;; Copyright (c) 2012-2015 Roland Walker
 ;;
 ;; Author: Roland Walker <walker@pobox.com>
 ;; Homepage: http://github.com/rolandwalker/flyspell-lazy
