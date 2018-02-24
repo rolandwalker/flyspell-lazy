@@ -455,7 +455,7 @@ When ADD-POINT is set, add a span around the current point."
 
         ;; remove text-free spans
         (dolist (chg flyspell-changes)
-          (unless (string-match-p "[[:alpha:]]" (buffer-substring-no-properties (car chg) (cdr chg)))
+          (unless (string-match-p "[[:alpha:]]" (flyspell-lazy-safe-buffer-substring (car chg) (cdr chg)))
             (setf (car chg) nil)
             (setf (cdr chg) nil)))
         (callf2 remove '(nil) flyspell-changes)
@@ -478,7 +478,7 @@ When ADD-POINT is set, add a span around the current point."
         ;; remove spans without substantial words
         (let ((pattern (concat "[[:alpha:]]\\{" (format "%s" flyspell-lazy-minimum-word-length) ",\\}")))
           (dolist (chg flyspell-changes)
-            (unless (string-match-p pattern (buffer-substring-no-properties (car chg) (cdr chg)))
+            (unless (string-match-p pattern (flyspell-lazy-safe-buffer-substring (car chg) (cdr chg)))
               (setf (car chg) nil)
               (setf (cdr chg) nil)))
           (callf2 remove '(nil) flyspell-changes))
