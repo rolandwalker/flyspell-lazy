@@ -569,7 +569,7 @@ If SECONDS is t, hurry by 1 second."
        ;; For other cases, the regular idle timer will catch up with the typist.
        (memq (aref (this-command-keys-vector) 0) '(?\n ?\r ?\f ?\t ?\s ?, ?: ?! ?. ?? ?\" ?\( ?\) ?/))
        (not (minibufferp (current-buffer)))
-       (not (ignore-errors (looking-back "[ \n\t\r\f,:!.?\"()/]\\{2\\}\\=")))))
+       (not (ignore-errors (looking-back "[ \n\t\r\f,:!.?\"()/]\\{2\\}\\=" 4)))))
 
 (defsubst flyspell-lazy-prev-or-current-word-contains-error ()
   "Whether the previous or current word contains an error.
