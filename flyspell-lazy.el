@@ -367,7 +367,7 @@ START and END are as documented for `buffer-substring-no-properties'."
 
 (defsubst flyspell-lazy-checkable-buffer-p (&optional buffer)
   "Whether BUFFER is checkable."
-  (callf or buffer (current-buffer))
+  (cl-callf or buffer (current-buffer))
   (when (memq buffer flyspell-lazy-buffer-list)
     buffer))
 
@@ -391,7 +391,7 @@ Depends on variables bound in `flyspell-lazy-refine-changes'."
          (setf (cdr (car (last merged-changes))) (cdr chg)))
         (t
          ;; keep this span unaltered
-         (callf append merged-changes (list chg)))))
+         (cl-callf append merged-changes (list chg)))))
     (setq flyspell-changes merged-changes)))
 
 ;; This is the main bit of logic that allows flyspell-lazy
@@ -425,7 +425,7 @@ When ADD-POINT is set, add a span around the current point."
                 flyspell-changes))
 
         ;; strip bogons
-        (callf2 remove '(nil) flyspell-changes)
+        (cl-callf2 remove '(nil) flyspell-changes)
 
         ;; replace nils and single entries with integers
         (dolist (chg flyspell-changes)
@@ -460,7 +460,7 @@ When ADD-POINT is set, add a span around the current point."
           (unless (string-match-p "[[:alpha:]]" (flyspell-lazy-safe-buffer-substring (car chg) (cdr chg)))
             (setf (car chg) nil)
             (setf (cdr chg) nil)))
-        (callf2 remove '(nil) flyspell-changes)
+        (cl-callf2 remove '(nil) flyspell-changes)
 
         ;; extend span boundaries to whitespace breaks
         (dolist (chg flyspell-changes)
@@ -483,7 +483,7 @@ When ADD-POINT is set, add a span around the current point."
             (unless (string-match-p pattern (flyspell-lazy-safe-buffer-substring (car chg) (cdr chg)))
               (setf (car chg) nil)
               (setf (cdr chg) nil)))
-          (callf2 remove '(nil) flyspell-changes))
+          (cl-callf2 remove '(nil) flyspell-changes))
 
         ;; sort and merge contiguous spans, second pass
         (flyspell-lazy-sort-and-merge-spans nearby)
@@ -500,7 +500,7 @@ When ADD-POINT is set, add a span around the current point."
           (when (<= (abs (- (cdr chg) (car chg))) tinysize)
             (setf (car chg) nil)
             (setf (cdr chg) nil)))
-        (callf2 remove '(nil) flyspell-changes)))))
+        (cl-callf2 remove '(nil) flyspell-changes)))))
 
 (defsubst flyspell-lazy-strip-text (text)
   "Strip TEXT to prepare for comparison."
@@ -524,7 +524,7 @@ This is used to avoid unneeded spell checks."
                         (car (car flyspell-changes))
                         (cdr (car flyspell-changes))))))
         (unless (get 'flyspell-lazy-last-text 'stripped)
-          (callf flyspell-lazy-strip-text flyspell-lazy-last-text)
+          (cl-callf flyspell-lazy-strip-text flyspell-lazy-last-text)
           (put 'flyspell-lazy-last-text 'stripped t))
         (flyspell-lazy-debug-progn
           (message "comparing %s / %s" flyspell-lazy-last-text new-text))
@@ -590,12 +590,12 @@ after the point."
 
 (defun flyspell-lazy-uncheck-buffer (&optional buffer)
   "Remove BUFFER from the list of checkable buffers."
-  (callf or buffer (current-buffer))
-  (callf2 remove buffer flyspell-lazy-buffer-list))
+  (cl-callf or buffer (current-buffer))
+  (cl-callf2 remove buffer flyspell-lazy-buffer-list))
 
 (defun flyspell-lazy-disallowed-buffer-p (&optional buffer)
   "Whether BUFFER is to be disallowed from checking."
-  (callf or buffer (current-buffer))
+  (cl-callf or buffer (current-buffer))
   (or (flyspell-minibuffer-p buffer)
       (catch 'match
         (dolist (pat flyspell-lazy-disallow-buffers)
@@ -685,7 +685,7 @@ be activated in every flyspell buffer."
 
     (unless (numberp flyspell-lazy-minimum-word-length)
       (setq flyspell-lazy-minimum-word-length 1))
-    (callf round flyspell-lazy-minimum-word-length)
+    (cl-callf round flyspell-lazy-minimum-word-length)
     (unless (> flyspell-lazy-minimum-word-length 0)
       (setq flyspell-lazy-minimum-word-length 1))
 
