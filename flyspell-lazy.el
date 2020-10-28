@@ -181,7 +181,7 @@
 
 (eval-and-compile
   ;; for callf, callf2, setf
-  (require 'cl))
+  (require 'cl-lib))
 
 ;;; declarations
 
