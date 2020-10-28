@@ -877,7 +877,11 @@ would usually be skipped."
       (with-timeout (5 (message "Spellcheck interrupted"))
         (when font-lock-mode
           (let ((font-lock-fontify-buffer-function 'font-lock-default-fontify-buffer))
-            (font-lock-fontify-buffer)))
+            (if (fboundp 'font-lock-ensure)
+                (progn
+                  (font-lock-flush)
+                  (font-lock-ensure))
+              (font-lock-fontify-buffer))))
         (if flyspell-lazy-single-ispell
             (flyspell-lazy--with-mocked-function 'ispell-set-spellchecker-params t
               (flyspell-lazy--with-mocked-function 'flyspell-accept-buffer-local-defs t
