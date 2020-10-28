@@ -711,7 +711,7 @@ be activated in every flyspell buffer."
       (setq flyspell-lazy-window-timer (run-with-idle-timer flyspell-lazy-window-idle-seconds t 'flyspell-lazy-check-visible)))
 
     (add-hook 'kill-buffer-hook #'(lambda ()
-                                    (with-demoted-errors (flyspell-lazy-uncheck-buffer))))
+                                    (with-demoted-errors "Error: %S" (flyspell-lazy-uncheck-buffer))))
     (add-hook 'after-change-functions 'flyspell-lazy-after-change-function nil t)))
 
 ;; spellchecker functions
