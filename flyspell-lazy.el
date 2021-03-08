@@ -285,7 +285,6 @@ Spellchecking is also disabled in the minibuffer."
 
 (defvar flyspell-lazy-mode         nil "Mode variable for `flyspell-lazy-mode'.")
 (defvar flyspell-lazy-local        nil "Whether flyspell-lazy is active in the current buffer.")
-(defvar flyspell-lazy-buffer-list  nil "List of buffers in which to run flyspell-lazy idle timer.")
 (defvar flyspell-lazy-timer        nil "Idle timer used by flyspell-lazy.")
 (defvar flyspell-lazy-window-timer nil "Idle timer used by flyspell-lazy for checking the visible window.")
 (defvar flyspell-lazy-hurry-flag   nil "Non-nil means hurrying is currently active.")
@@ -367,9 +366,8 @@ START and END are as documented for `buffer-substring-no-properties'."
 
 (defsubst flyspell-lazy-checkable-buffer-p (&optional buffer)
   "Whether BUFFER is checkable."
-  (cl-callf or buffer (current-buffer))
-  (when (memq buffer flyspell-lazy-buffer-list)
-    buffer))
+  (and (buffer-live-p buffer)
+       (buffer-local-value 'flyspell-lazy-local (or buffer (current-buffer)))))
 
 (defsubst flyspell-lazy-sort-and-merge-spans (nearby)
   "Operate on `flyspell-changes' directly, sorting and merging spans.
@@ -590,8 +588,8 @@ after the point."
 
 (defun flyspell-lazy-uncheck-buffer (&optional buffer)
   "Remove BUFFER from the list of checkable buffers."
-  (cl-callf or buffer (current-buffer))
-  (cl-callf2 remove buffer flyspell-lazy-buffer-list))
+  (setf (buffer-local-value 'flyspell-lazy-local (or buffer (current-buffer)))
+        nil))
 
 (defun flyspell-lazy-disallowed-buffer-p (&optional buffer)
   "Whether BUFFER is to be disallowed from checking."
@@ -643,7 +641,6 @@ be activated in every flyspell buffer."
   (when global
     (flyspell-lazy-debug-progn
       (message "unloading flyspell-lazy globally"))
-    (setq flyspell-lazy-buffer-list nil)
     (remove-hook 'flyspell-mode-hook 'flyspell-lazy-load)
     (when (timerp flyspell-lazy-timer)
       (cancel-timer flyspell-lazy-timer))
@@ -672,7 +669,6 @@ be activated in every flyspell buffer."
       (message "setting up flyspell-lazy for buffer"))
 
     (setq flyspell-lazy-local t)
-    (add-to-list 'flyspell-lazy-buffer-list (current-buffer))
 
     (set (make-local-variable 'flyspell-large-region) 1)
 
